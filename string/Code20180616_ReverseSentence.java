@@ -1,5 +1,12 @@
 package alogorithms.string;
 
+/**
+ * Created with IntelliJ IDEA
+ * Author: aleng
+ * Date  : 2018/6/18
+ * Time  : 17:51
+ * Description:翻转字符串(student. a am I -> i am a student.)
+ **/
 public class Code20180616_ReverseSentence {
 
     public static String reverseSentence(String str) {
