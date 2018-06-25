@@ -28,10 +28,20 @@ public class Code_072_Add {
         System.out.println(add(3,-5)); //-2
         System.out.println(add(0,1));  //1
 
+        System.out.println( 1 & 1);
+        System.out.println( 1 & 0);
+        System.out.println( 0 & 1);
+        System.out.println( 0 & 0);
+
         System.out.println( 1 | 1);
         System.out.println( 1 | 0);
         System.out.println( 0 | 1);
         System.out.println( 0 | 0);
+
+        System.out.println( 1 ^ 1);
+        System.out.println( 1 ^ 0);
+        System.out.println( 0 ^ 1);
+        System.out.println( 0 ^ 0);
     }
 }
 /**

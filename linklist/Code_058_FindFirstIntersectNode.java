@@ -1,4 +1,7 @@
 package alogorithms.linklist;
+
+import alogorithms.structure.ListNode;
+
 /**
  * Created with IntelliJ IDEA
  * Author: aleng
@@ -8,110 +11,101 @@ package alogorithms.linklist;
  **/
 public class Code_058_FindFirstIntersectNode {
 
-	public static class Node {
-		public int value;
-		public Node next;
-
-		public Node(int data) {
-			this.value = data;
-		}
-	}
-
-	public static Node getIntersectNode(Node head1, Node head2) {
+	public static ListNode getIntersectNode(ListNode head1, ListNode head2) {
 		if (head1 == null || head2 == null) {
 			return null;
 		}
-		Node loop1 = getLoopNode(head1);
-		Node loop2 = getLoopNode(head2);
-		if (loop1 == null && loop2 == null) {
+		ListNode loop1 = Code_022_EntryNodeOfLoop.entryNodeOfLoop(head1); //入环点
+		ListNode loop2 = Code_022_EntryNodeOfLoop.entryNodeOfLoop(head2); //入环点
+		if (loop1 == null && loop2 == null) {  //如果两个链表都没有环
 			return noLoop(head1, head2);
 		}
-		if (loop1 != null && loop2 != null) {
+		if (loop1 != null && loop2 != null) { //如果两个链表都有环
 			return bothLoop(head1, loop1, head2, loop2);
 		}
+		//如果两个链表一个有环，一个没环，不可能相交
 		return null;
 	}
-
-	public static Node getLoopNode(Node head) {
-		if (head == null || head.next == null || head.next.next == null) {
-			return null;
-		}
-		Node n1 = head.next; // n1 -> slow
-		Node n2 = head.next.next; // n2 -> fast
-		while (n1 != n2) {
-			if (n2.next == null || n2.next.next == null) {
-				return null;
-			}
-			n2 = n2.next.next;
-			n1 = n1.next;
-		}
-		n2 = head; // n2 -> walk again from head
-		while (n1 != n2) {
-			n1 = n1.next;
-			n2 = n2.next;
-		}
-		return n1;
-	}
-
-	public static Node noLoop(Node head1, Node head2) {
+	//两个没环的相交点
+	public static ListNode noLoop(ListNode head1, ListNode head2) {
 		if (head1 == null || head2 == null) {
 			return null;
 		}
-		Node cur1 = head1;
-		Node cur2 = head2;
-		int n = 0;
-		while (cur1.next != null) {
-			n++;
-			cur1 = cur1.next;
-		}
-		while (cur2.next != null) {
-			n--;
-			cur2 = cur2.next;
-		}
-		if (cur1 != cur2) {
-			return null;
-		}
-		cur1 = n > 0 ? head1 : head2;
-		cur2 = cur1 == head1 ? head2 : head1;
-		n = Math.abs(n);
-		while (n != 0) {
-			n--;
-			cur1 = cur1.next;
-		}
-		while (cur1 != cur2) {
-			cur1 = cur1.next;
-			cur2 = cur2.next;
-		}
-		return cur1;
+        ListNode cur1 = head1,cur2 = head2;
+		int len1 = 0, len2 = 0;
+		while (cur1 != null){
+		    len1++;
+		    cur1 = cur1.next;
+        }
+        while (cur2 != null){
+            len2++;
+            cur2 = cur2.next;
+        }
+        int n = len1 - len2;
+        cur1 = head1;
+        cur2 = head2;
+		if (n > 0){
+		    while (n != 0){
+		        n--;
+		        cur1 = cur1.next;
+            }
+        }
+        if (n < 0){
+		    n = -n;
+            while (n != 0){
+                n--;
+                cur2 = cur2.next;
+            }
+        }
+        while (cur1 != null && cur2 != null){
+		    if (cur1 == cur2){
+		        return cur1;
+            }
+            cur1 = cur1.next;
+		    cur2 = cur2.next;
+        }
+        return null;
 	}
-
-	public static Node bothLoop(Node head1, Node loop1, Node head2, Node loop2) {
-		Node cur1 = null;
-		Node cur2 = null;
-		if (loop1 == loop2) {
-			cur1 = head1;
-			cur2 = head2;
-			int n = 0;
-			while (cur1 != loop1) {
-				n++;
-				cur1 = cur1.next;
-			}
-			while (cur2 != loop2) {
-				n--;
-				cur2 = cur2.next;
-			}
-			cur1 = n > 0 ? head1 : head2;
-			cur2 = cur1 == head1 ? head2 : head1;
-			n = Math.abs(n);
-			while (n != 0) {
-				n--;
-				cur1 = cur1.next;
-			}
-			while (cur1 != cur2) {
-				cur1 = cur1.next;
-				cur2 = cur2.next;
-			}
-			return cur1;
+    //两个都有环的相交点
+	public static ListNode bothLoop(ListNode head1, ListNode loop1, ListNode head2, ListNode loop2) {
+		ListNode cur1 = null;
+		ListNode cur2 = null;
+		if (loop1 == loop2) { //两个入环点相同，又跳到两个没环的相交点的问题
+            cur1 = head1;
+            cur2 = head2;
+		    int len1 = 1, len2 = 1;
+            while (cur1 != loop1){
+                len1++;
+                cur1 = cur1.next;
+            }
+            while (cur2 != loop2){
+                len2++;
+                cur2 = cur2.next;
+            }
+            int n = len1 - len2;
+            cur1 = head1;
+            cur2 = head2;
+            if (n > 0){
+                while (n != 0){
+                    n--;
+                    cur1 = cur1.next;
+                }
+            }
+            if (n < 0){
+                n = -n;
+                while (n != 0){
+                    n--;
+                    cur2 = cur2.next;
+                }
+            }
+            while (cur1 != loop1 && cur2 != loop2){
+                if (cur1 == cur2){
+                    return cur1;
+                }
+                cur1 = cur1.next;
+                cur2 = cur2.next;
+            }
+            return null;
 		} else {
 			cur1 = loop1.next;
 			while (cur1 != loop1) {
@@ -126,44 +120,44 @@ public class Code_058_FindFirstIntersectNode {
 
 	public static void main(String[] args) {
 		// 1->2->3->4->5->6->7->null
-		Node head1 = new Node(1);
-		head1.next = new Node(2);
-		head1.next.next = new Node(3);
-		head1.next.next.next = new Node(4);
-		head1.next.next.next.next = new Node(5);
-		head1.next.next.next.next.next = new Node(6);
-		head1.next.next.next.next.next.next = new Node(7);
+		ListNode head1 = new ListNode(1);
+		head1.next = new ListNode(2);
+		head1.next.next = new ListNode(3);
+		head1.next.next.next = new ListNode(4);
+		head1.next.next.next.next = new ListNode(5);
+		head1.next.next.next.next.next = new ListNode(6);
+		head1.next.next.next.next.next.next = new ListNode(7);
 
 		// 0->9->8->6->7->null
-		Node head2 = new Node(0);
-		head2.next = new Node(9);
-		head2.next.next = new Node(8);
+		ListNode head2 = new ListNode(0);
+		head2.next = new ListNode(9);
+		head2.next.next = new ListNode(8);
 		head2.next.next.next = head1.next.next.next.next.next; // 8->6
-		System.out.println(getIntersectNode(head1, head2).value);
+		System.out.println(getIntersectNode(head1, head2).val);
 
 		// 1->2->3->4->5->6->7->4...
-		head1 = new Node(1);
-		head1.next = new Node(2);
-		head1.next.next = new Node(3);
-		head1.next.next.next = new Node(4);
-		head1.next.next.next.next = new Node(5);
-		head1.next.next.next.next.next = new Node(6);
-		head1.next.next.next.next.next.next = new Node(7);
+		head1 = new ListNode(1);
+		head1.next = new ListNode(2);
+		head1.next.next = new ListNode(3);
+		head1.next.next.next = new ListNode(4);
+		head1.next.next.next.next = new ListNode(5);
+		head1.next.next.next.next.next = new ListNode(6);
+		head1.next.next.next.next.next.next = new ListNode(7);
 		head1.next.next.next.next.next.next = head1.next.next.next; // 7->4
 
 		// 0->9->8->2...
-		head2 = new Node(0);
-		head2.next = new Node(9);
-		head2.next.next = new Node(8);
+		head2 = new ListNode(0);
+		head2.next = new ListNode(9);
+		head2.next.next = new ListNode(8);
 		head2.next.next.next = head1.next; // 8->2
-		System.out.println(getIntersectNode(head1, head2).value);
+		System.out.println(getIntersectNode(head1, head2).val);
 
 		// 0->9->8->6->4->5->6..
-		head2 = new Node(0);
-		head2.next = new Node(9);
-		head2.next.next = new Node(8);
+		head2 = new ListNode(0);
+		head2.next = new ListNode(9);
+		head2.next.next = new ListNode(8);
 		head2.next.next.next = head1.next.next.next.next.next; // 8->6
-		System.out.println(getIntersectNode(head1, head2).value);
+		System.out.println(getIntersectNode(head1, head2).val);
 
 	}
 

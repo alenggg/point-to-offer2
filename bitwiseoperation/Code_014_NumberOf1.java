@@ -1,5 +1,7 @@
 package alogorithms.bitwiseoperation;
 
+import java.sql.SQLOutput;
+
 /**
  * Created with IntelliJ IDEA
  * Author: aleng
@@ -45,6 +47,23 @@ public class Code_014_NumberOf1 {
             n = (n-1)&n;
         }
         return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Integer.MAX_VALUE:"+Integer.MAX_VALUE);
+        System.out.println("Integer.MIN_VALUE:"+Integer.MIN_VALUE);
+        //<<n:二进制的数往左移动n位,后面补0,在不越界的情况下就是乘2
+        System.out.println("------位运算:左移--------");
+        System.out.println("1073741824左移一位:"+ (1073741824 << 1));
+        System.out.println("2147483647左移一位:" + (2147483647 << 1));
+        System.out.println("-2147483648左移一位:" + (-2147483648 << 1));
+        System.out.println("-2147483647左移一位:" + (-2147483647 << 1));
+        System.out.println("-1073741824左移一位:"+ (-1073741824 << 1));
+        //>>n:二进制的数往右移动n位,正数后面补0,负数前面补1,在不越界的情况下就是除以2
+        System.out.println("------位运算:右移--------");
+        System.out.println("-2147483648右移一位:"+(-2147483648 >> 1));
+        System.out.println("-1右移一位:"+(-1 >> 1));
+        System.out.println("1右移一位:"+(1 >> 1));
     }
 }
 /**
