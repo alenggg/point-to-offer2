@@ -55,6 +55,39 @@ public class Code_052_GetNumberOfK {
         return mid;
     }
 
+
+    public static int getNumberOfK2(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        int flag = getNumberOfK2(array, 0, array.length - 1, k);
+        if (array[flag] == k) {
+            int start = flag, end = flag;
+            while (start >= 0 && array[start] == k) {
+                start--;
+            }
+            while (end <= array.length - 1 && array[end] == k) {
+                end++;
+            }
+            return end - start - 1;
+        }
+        return 0;
+    }
+
+    private static int getNumberOfK2(int[] array, int l, int r, int k) {
+        if (l > r) {
+            return 0;
+        }
+        int mid = (l + r) / 2;
+        if (array[mid] > k) {
+            return getNumberOfK2(array, l, mid - 1, k);
+        } else if (array[mid] < k) {
+            return getNumberOfK2(array, mid + 1, r, k);
+        } else {
+            return mid;
+        }
+    }
+
     public static void main(String[] args) {
         int[] data1 = new int[]{1,2,3,3,3,3,5,6};
         int[] data2 = new int[]{1,2,3,3,3,3,4,5};

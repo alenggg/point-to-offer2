@@ -16,7 +16,7 @@ public class Code_073_ExchangeTwoNumbers {
         a = a + b;
         b = a - b;
         a = a - b;
-        System.out.println("a="+a+",b="+b);
+        System.out.println("a=" + a + ",b=" + b);
 
         //基于异或法
         a = 3;
@@ -24,6 +24,6 @@ public class Code_073_ExchangeTwoNumbers {
         a = a ^ b;
         b = a ^ b;
         a = a ^ b;
-        System.out.println("a="+a+",b="+b);
+        System.out.println("a=" + a + ",b=" + b);
     }
 }

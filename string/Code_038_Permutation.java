@@ -1,6 +1,7 @@
 package alogorithms.string;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA
@@ -17,6 +18,7 @@ public class Code_038_Permutation {
             char[] chars = str.toCharArray();
             permutation(chars,0,res);
         }
+        Collections.sort(res);
         return res;
     }
 
@@ -40,6 +42,11 @@ public class Code_038_Permutation {
                 res.add(String.valueOf(chars)); //加进去
             }
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(permutation("abc"));
+
     }
 }
 /**

@@ -44,6 +44,18 @@ public class Code_018_DeleteDuplication {
         return pHead;
     }
 
+    /**
+     * 测试用例:
+     * {1,1}
+     * <p>
+     * 对应输出应该为:
+     * <p>
+     * {1}
+     * <p>
+     * 你的输出为:
+     * <p>
+     * {1,1}
+     */
     public static ListNode deleteDuplication2(ListNode<Integer> pHead) {
         if (pHead == null)
             return null;
@@ -54,7 +66,7 @@ public class Code_018_DeleteDuplication {
         while (p != null && p.next != null) {
             if (p.val == p.next.val) {
                 int val = p.val;
-                while (p != null && p.val == val) {
+                while (p.next != null && p.next.val == val) {
                     p = p.next;
                 }
                 preNode.next = p;
@@ -68,22 +80,22 @@ public class Code_018_DeleteDuplication {
 
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
+        ListNode listNode2 = new ListNode(1);
         ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(4);
-        ListNode listNode6 = new ListNode(5);
+//        ListNode listNode4 = new ListNode(4);
+//        ListNode listNode5 = new ListNode(4);
+//        ListNode listNode6 = new ListNode(5);
         listNode1.next = listNode2;
         listNode2.next = listNode3;
-        listNode3.next = listNode4;
-        listNode4.next = listNode5;
-        listNode5.next = listNode6;
+//        listNode3.next = listNode4;
+//        listNode4.next = listNode5;
+//        listNode5.next = listNode6;
 
         ListNode listNode = deleteDuplication2(listNode1);
+        System.out.println(listNode);
     }
 }
 /**
- *
  * 题目:删除链表中重复的节点
  * 在一个排序的链表中，如何删除重复的节点？
  * 例如：1->2->3->3->4->4->5删除之后1->2->5

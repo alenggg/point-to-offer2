@@ -35,6 +35,14 @@ public class Code_055_KthNode {
         return null;
     }
 
+    public static TreeNode kthNode2(TreeNode pRoot, int k) {
+        if (pRoot == null){
+            return null;
+        }
+
+        return  null;
+    }
+
     public static void main(String[] args) {
         TreeNode<Integer> root = new TreeNode<>(5);
         root.left = new TreeNode<>(3);

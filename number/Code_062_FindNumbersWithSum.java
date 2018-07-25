@@ -34,8 +34,9 @@ public class Code_062_FindNumbersWithSum{
     public static void main(String[] args) {
         int[] data = new int[]{1,2,4,7,11,15};
         System.out.println(findNumbersWithSum(data, 15));
-
-
     }
 }
-
+/*
+* 输入一个递增排序的数字和而一个数字s
+* 二分查找
+* */

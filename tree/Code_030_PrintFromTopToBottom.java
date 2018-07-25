@@ -34,6 +34,10 @@ public class Code_030_PrintFromTopToBottom {
         }
         return list;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
 /**
  *

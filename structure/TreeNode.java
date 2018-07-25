@@ -1,7 +1,10 @@
 package alogorithms.structure;
 
+import javax.swing.text.html.HTML;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created with IntelliJ IDEA
@@ -52,5 +55,60 @@ public class TreeNode<T> {
             cur = cur.right;
         }
         return ret.toString();
+    }
+
+    public ArrayList<T> preOrder() {
+        ArrayList<T> arrayList = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(this);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            arrayList.add((T) pop.val);
+            if (pop.right != null)
+                stack.push(pop.right);
+            if (pop.left != null)
+                stack.push(pop.left);
+        }
+        return arrayList;
+    }
+
+    //中序遍历，左中右
+    public ArrayList<T> inOrder() {
+        ArrayList<T> arrayList = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode<T> head = this;
+        while (!stack.isEmpty() || head != null) {
+            if (head != null) {
+                stack.push(head);
+                head = head.left;
+            } else {
+                TreeNode pop = stack.pop();
+                arrayList.add((T) pop.val);
+                head = pop.right;
+            }
+        }
+        return arrayList;
+    }
+
+    //后序遍历 左右中 (先把中右左的结果依次存在栈中，再从栈中读取结果就是后序遍历)
+    public ArrayList<T> posOrder() {
+        ArrayList<T> arrayList = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> res = new Stack<>();
+        stack.push(this);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            //arrayList.add((T) pop.val);
+            res.push(pop);
+            if (pop.left != null)
+                stack.push(pop.left);
+            if (pop.right != null)
+                stack.push(pop.right);
+
+        }
+        while (!res.isEmpty()) {
+            arrayList.add((T) res.pop().val);
+        }
+        return arrayList;
     }
 }

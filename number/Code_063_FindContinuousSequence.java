@@ -45,5 +45,7 @@ public class Code_063_FindContinuousSequence {
         ArrayList<ArrayList<Integer>> continuousSequence = findContinuousSequence(15);
         System.out.println(continuousSequence);
     }
-
 }
+/*
+ * 是一个递增序列
+ */

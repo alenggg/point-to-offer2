@@ -1,5 +1,7 @@
 package alogorithms.bitwiseoperation;
 
+import java.lang.reflect.Type;
+
 /**
  * Created with IntelliJ IDEA
  * Author: aleng
@@ -42,6 +44,7 @@ public class Code_072_Add {
         System.out.println( 1 ^ 0);
         System.out.println( 0 ^ 1);
         System.out.println( 0 ^ 0);
+
     }
 }
 /**

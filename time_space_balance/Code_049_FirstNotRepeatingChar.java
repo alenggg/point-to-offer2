@@ -9,24 +9,10 @@ package alogorithms.time_space_balance;
  **/
 public class Code_049_FirstNotRepeatingChar {
     //暴力求解，时间复杂度o(n^2),空间复杂度o(1)
-    public static char firstNotRepeatingChar(String str) {
-        //此处，\77表示ascii为77的字符(即?),用于表征没有只出现一次的字符
-        if (str == null || str.length() == 0)
-            return '\77';
-        for (int i = 0; i < str.length() - 1; i++) {
-            char temp = str.charAt(i);
-            for (int j = 0; j <= str.length(); j++) {
-                if (j == i) continue;
-                if (j == str.length())
-                    return temp;
-                if (temp == str.charAt(j))
-                    break;
-            }
+    public static int firstNotRepeatingChar2(String str) {
+        if (str == null){
+            return -1;
         }
-        return '\77';
-    }
-
-    public static char firstNotRepeatingChar2(String str) {
         //使用这个数组记录字符出现次数
         int[] times = new int[256];
         //第一遍遍历
@@ -36,13 +22,12 @@ public class Code_049_FirstNotRepeatingChar {
         //第二次遍历
         for (int i = 0; i < str.length(); i++) {
             if (times[str.charAt(i)] == 1)
-                return str.charAt(i);
+                return str.indexOf(str.charAt(i));
         }
-        return '\77';
+        return -1;
     }
 
     public static void main(String[] args) {
-        System.out.println(firstNotRepeatingChar("abaccdeff"));
         System.out.println(firstNotRepeatingChar2("abaccdeff"));
     }
 }

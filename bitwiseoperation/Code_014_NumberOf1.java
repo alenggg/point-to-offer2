@@ -1,6 +1,7 @@
 package alogorithms.bitwiseoperation;
 
 import java.sql.SQLOutput;
+import java.util.Scanner;
 
 /**
  * Created with IntelliJ IDEA
@@ -37,7 +38,7 @@ public class Code_014_NumberOf1 {
     }
     /**
      * (1)如果二进制数最后一位为1,减一以后:1变为0
-     * (2)如果二进制数最后以为为0,减一以后:最后一位1变为0,后面的0都变为1
+     * (2)如果二进制数最后一位为0,减一以后:最后一位1变为0,后面的0都变为1
      * 所以一个二进制数和该二进制数减一做与运算相当于:二进制数最后一位1变为0，然后循环
      */
     public static int numberOf1_3(int n){
@@ -79,5 +80,5 @@ public class Code_014_NumberOf1 {
  *          (3)这样每次移动一位，知道整个整数变为0为止。
  * 现在的问题变成了怎么判断一个整数的最右边是不是1.
  * 如果一个整数与1做与运算的结果是1，则表示该整数最右边一位是1，否则是0.
- * 基于这种思路
+ * 基于这种思路.
  */
